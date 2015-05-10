@@ -1,11 +1,16 @@
 import os
-from flask import Flask
-from flask.ext.pymongo import PyMongo
+import flask
+# from flask.ext.pymongo import PyMongo
 
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return flask.render_template('home.html')
+
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()

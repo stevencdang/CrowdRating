@@ -8,6 +8,8 @@ Flask/Heroku framework for performing crowd ratings using amazon mturk
 * PyMongo
 * Flask-Pymongo
 * virtualenv
+* Jquery 1.11.3
+* skeljs 2.2.1
 
 
 ##Install Instructions:
@@ -39,3 +41,11 @@ Password:
 
 $ foreman start
 ```
+
+## Running the application
+There are 2 methods to run locally
+
+1. Running a local Flask web-app container
+2. Running a local heroku dyno container with Flask running
+
+
