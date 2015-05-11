@@ -2,18 +2,19 @@
 
 # Author: Steven Dang stevencdang.com
 
-from flask.ext.login import UserMixin, AnonymousUserMixin
+# from main import login_manager
+# from flask.ext.login import UserMixin, AnonymousUserMixin
 
 
-class Rater(AnonymousUserMixin):
-    """
-    An anonymous rating user
-
-    """
-
-    def __init__(self, name=None, type='Rater'):
-        self.name = name
-        self.type = type
+# class Rater(AnonymousUserMixin):
+    # """
+    # An anonymous rating user
+#
+    # """
+#
+    # def __init__(self, name=None, type='Rater'):
+        # self.name = name
+        # self.type = type
 
 
 class Rating:

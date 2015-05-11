@@ -44,6 +44,12 @@ mongo = PyMongo(app)
 def index():
     prompt = mongo.db.prompts.find_one()
     question = prompt['question']
+    print "*****************************"
+    print mongo.db['ratings'].find().count()
+    rating = Rating('likert', 1, 2)
+    mongo.db['ratings'].insert([rating])
+    print mongo.db.ratings.find().count()
+    print "#############################"
     return flask.render_template('home.html', question=question)
 
 
@@ -54,8 +60,9 @@ def likert():
         score = request.form['rating']
         data_ID = request.form['data-id']
         rating = Rating('likert', data_ID, score)
-        mongo.db.ratings.insert(rating)
         print mongo.db.ratings.find().count()
+        mongo.db.insert('ratings',rating)
+        # print mongo.db.ratings.find().count()
         idea = mongo.db.ideas.find_one()
         data = idea
         return flask.render_template('rating.html', form=form, data=data)
@@ -63,6 +70,7 @@ def likert():
         idea = mongo.db.ideas.find_one()
         data = idea
         return flask.render_template('rating.html', form=form, data=data)
+
 
 @app.route('/rate', methods=('GET', 'POST'))
 def submit():
@@ -72,3 +80,4 @@ def submit():
 if __name__ == '__main__':
     app.debug = True
     app.run()
+    # mongo.db.create_collection("ratings")
