@@ -1,15 +1,10 @@
-@charset "UTF-8";
-#navbar {
-  background: #464646;
-  line-height: 50px;
-  text-align: center;
-  width: 100%;
-}
+/******************************************************************** 
+ * Written by Steven C. Dang 
+ * Copyright 2015 
+ * stevencdang.com
+ ********************************************************************/
 
-#navbar .logo {
-  color: #ffb700;
-  font-weight: bold;
-}
+@charset "UTF-8";
 
 body {
 	background: #fff;
@@ -35,4 +30,46 @@ a {
 
 a:hover {
 	text-decoration: none;
+}
+
+.btn {
+  margin: 5px;
+  padding: 5px 20px;
+  font-size: 1.2em;
+  border-radius: 15px;
+  height: 3em;
+}
+
+.btn-primary {
+  background: #337ab7;
+  border-color: #337ab7;
+}
+
+#navbar {
+  background: #464646;
+  line-height: 50px;
+  text-align: center;
+  width: 100%;
+}
+
+#navbar .logo {
+  color: #ffb700;
+  color: #eee;
+  font-weight: bold;
+}
+
+#cover {
+  margin-top: 75px;
+  text-align: center;
+}
+
+#footer {
+  background: #464646;
+  text-align: center;
+  padding: 5px;
+}
+
+#footer .copy{
+  color: #eee;
+  font-size: 0.8em;
 }

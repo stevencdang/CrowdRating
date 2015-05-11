@@ -1,0 +1,58 @@
+<!-- 
+Written by: Steven C. Dang. 
+    stevencdang.com
+    Copyright 2015 
+-->
+
+{% extends "master.html" %}
+
+{% block title %}
+  Human Ratings
+{% endblock %}
+
+{% block styles %}
+  <link rel="stylesheet" 
+      href="{{ url_for('static', filename='css/rating.css') }}" />
+{% endblock %}
+{% block scripts %}{% endblock %}
+
+{% block body %}
+  <div id="cover" class="container">
+    <div class="row">
+      <div class="12u">
+        <h1>Directions</h1>
+        <span class="directions">
+            Please rate the following item according to how novel it is in responding to the following brainstorming prompt
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="6u -3u prompt">
+        <span class="prompt">
+          Imagine you are in a social setting and you've forgotten the name of someone you know. How might you recall their name without directly asking them?
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="4u -4u">
+        <div class="data">
+          {{ data }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="3u -5u rating">
+        <form>
+          <input type="radio" name="rating" value="7">7(Very Novel/Unique)<br>
+          <input type="radio" name="rating" value="6">6<br>
+          <input type="radio" name="rating" value="5">5<br>
+          <input type="radio" name="rating" value="4">4<br>
+          <input type="radio" name="rating" value="3">3<br>
+          <input type="radio" name="rating" value="2">2<br>
+          <input type="radio" name="rating" value="1">1(Very Common/Not Novel)
+          <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
