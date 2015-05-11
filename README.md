@@ -3,11 +3,14 @@ Flask/Heroku framework for performing crowd ratings using amazon mturk
 
 ## Requirements:
 * Python 2.7
-* Flask
 * pip
-* PyMongo
+* Flask
 * Flask-Pymongo
 * virtualenv
+* Flask-WTF
+* Flask-login
+
+## Dependencies
 * Jquery 1.11.3
 * skeljs 2.2.1
 
@@ -23,12 +26,12 @@ $ virtualenv venv
 
 Start to use the virtualenv by activating it (this must be done everytime you open a new terminal and you want to restart the webapp)
 ```
-# source venv/bin/activate
+$ source venv/bin/activate
 ```
 
 Install the dependent packages using pip
 ```
-$ pip install Flask gunicorn pymongo Flask-PyMongo
+$ pip install Flask gunicorn Flask-PyMongo Flask-PyMongo Flask-login Flask-WTF
 ```
 
 You can emulate a heroku stack to start the server easily as though it
@@ -46,6 +49,16 @@ $ foreman start
 There are 2 methods to run locally
 
 1. Running a local Flask web-app container
+
+```
+$ source venv/bin/activate
+(venv)$ python main.py
+```
+
 2. Running a local heroku dyno container with Flask running
 
+```
+$ source venv/bin/activate
+(venv)$ python main.py
+```
 
