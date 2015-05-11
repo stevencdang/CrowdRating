@@ -3,17 +3,28 @@
 <head>
   <meta charset="utf-8" />
   <title>{% block title %}{% endblock %}</title>
-  <link type="text/css" rel="stylesheet" 
+ 
+  <link rel="stylesheet" 
       href="{{ url_for('static', filename='css/style.css') }}" />
-  <script src="{{ url_for('static', filename='js/skel.min.js') }}">
   {% block styles %}{% endblock %}
+  
+  <script src="{{ url_for('static', filename='js/jquery-1.11.3.min.js') }}">
   </script>
-  <script>
-    skel.init();
+  <script src="{{ url_for('static', filename='js/skel.min.js') }}">
+  </script>
+  <script src="{{ url_for('static', filename='js/skel-layers.min.js') }}">
+  </script>
+  <script src="{{ url_for('static', filename='js/init.js') }}">
   </script>
   {% block scripts %}{% endblock %}
 </head>
 <body>
+
+{% block navbar %}
+<div id="navbar" class="skel-layer">
+  <span class="logo">Human Ratings Collector</span>
+</div>
+{% endblock %}
 
 {% block body %}{% endblock %}
 
