@@ -36,13 +36,14 @@ Written by: Steven C. Dang.
     <div class="row">
       <div class="4u -4u">
         <div class="data">
-          {{ data }}
+          {{ data.content }}
         </div>
       </div>
     </div>
     <div class="row">
       <div class="3u -5u rating">
-        <form>
+        <form method="POST" action="/rating/likert">
+          <input type="hidden" name='data-id' value="{{ data._id }}">
           <input type="radio" name="rating" value="7">7(Very Novel/Unique)<br>
           <input type="radio" name="rating" value="6">6<br>
           <input type="radio" name="rating" value="5">5<br>

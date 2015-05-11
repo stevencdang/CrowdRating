@@ -4,7 +4,10 @@
 
 # from urlparse import urlsplit
 import flask
+import forms
+from models import Rating
 from flask.ext.pymongo import PyMongo
+from flask import request
 from db_params import ALL_DBs as DBS
 
 
@@ -35,24 +38,36 @@ app.config['MONGO_PASSWORD'] = DBS['ideagensscd']['pswd']
 app.config['MONGO_HOST'] = DBS['ideagensscd']['url']
 app.config['MONGO_PORT'] = DBS['ideagensscd']['port']
 mongo = PyMongo(app)
-# db = mongo.db
 
 
 @app.route('/')
 def index():
     prompt = mongo.db.prompts.find_one()
     question = prompt['question']
-
     return flask.render_template('home.html', question=question)
 
 
-@app.route('/rating')
-def rating():
-    idea = mongo.db.ideas.find_one()
-    data = idea['content']
+@app.route('/rating/likert', methods=('GET', 'POST'))
+def likert():
+    form = forms.LikertRatingForm(csrf_enabled=False)
+    if request.method == 'POST':
+        score = request.form['rating']
+        data_ID = request.form['data-id']
+        rating = Rating('likert', data_ID, score)
+        mongo.db.ratings.insert(rating)
+        print mongo.db.ratings.find().count()
+        idea = mongo.db.ideas.find_one()
+        data = idea
+        return flask.render_template('rating.html', form=form, data=data)
+    else:
+        idea = mongo.db.ideas.find_one()
+        data = idea
+        return flask.render_template('rating.html', form=form, data=data)
 
-    return flask.render_template('rating.html', data=data)
-
+@app.route('/rate', methods=('GET', 'POST'))
+def submit():
+    form = forms.LikertRatingForm(csrf_enabled=False)
+    return flask.render_template('rating.html', form=form, data=data)
 
 if __name__ == '__main__':
     app.debug = True
