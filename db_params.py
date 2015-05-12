@@ -32,6 +32,13 @@ chi1 = {'url': "kahana.mongohq.com",
         'pswd': 'lTwI9iiTm7'
         }
 
+humandatabank = {'url': "ds041327.mongolab.com",
+               'port': 41327,
+               'dbName': 'human_data_bank',
+               'user': 'heroku',
+               'pswd': 'j4!g#RV$nAr5&FBq$BK$',
+               }
+
 # Info for connecting to a local instance of meteor's mongo.
 # Meteor must be running to connect
 local_meteor = {'url': "localhost",
@@ -49,7 +56,7 @@ ALL_DBs = {'ideagens': ideagens,
              'ideagensscd': ideagensscd,
           }
 
-def get_url(param=ideagensscd, use_cred=True):
+def get_url(param=humandatabank, use_cred=True):
     '''
     The mongo url derived from given parameters
 
