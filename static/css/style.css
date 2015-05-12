@@ -36,13 +36,14 @@ a:hover {
   margin: 5px;
   padding: 5px 20px;
   font-size: 1.2em;
-  border-radius: 15px;
+  border-radius: 10px;
   height: 3em;
 }
 
 .btn-primary {
   background: #337ab7;
   border-color: #337ab7;
+  color: #e7e7e7;
 }
 
 #navbar {

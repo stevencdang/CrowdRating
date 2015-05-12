@@ -9,6 +9,7 @@ Flask/Heroku framework for performing crowd ratings using amazon mturk
 * virtualenv
 * Flask-WTF
 * Flask-login
+* numpy
 
 ## Dependencies
 * Jquery 1.11.3

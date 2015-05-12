@@ -13,7 +13,7 @@
 .data {
   background: #ddd;
   color: #000;
-  padding: 100px 0;
+  padding: 50px 30px;
   margin: 15px;
   border-radius: 15px;
 }
@@ -28,5 +28,7 @@
   margin-top: 30px;
 }
 
-
+input[type="radio"] {
+  margin: 5px;
+}
 

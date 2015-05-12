@@ -1,15 +1,23 @@
 #!/usr/bin/env python
 
 # Author: Steven Dang stevencdang.com
+# Copyright 2015
 
 # from urlparse import urlsplit
 import flask
+import logging
 import forms
+import task_manager
 from models import Rating
 from flask.ext.pymongo import PyMongo
 from flask import request
 from db_params import ALL_DBs as DBS
 
+
+logging.basicConfig(format='%(levelname)s:%(message)s',
+                    level=logging.DEBUG)
+
+logger = logging.getLogger("Main Routes")
 
 app = flask.Flask(__name__)
 # Get the URL from the Heroku setting.
@@ -42,42 +50,29 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def index():
-    prompt = mongo.db.prompts.find_one()
-    question = prompt['question']
-    print "*****************************"
-    print mongo.db['ratings'].find().count()
-    rating = Rating('likert', 1, 2)
-    mongo.db['ratings'].insert([rating])
-    print mongo.db.ratings.find().count()
-    print "#############################"
-    return flask.render_template('home.html', question=question)
+    return flask.render_template('home.html')
 
 
 @app.route('/rating/likert', methods=('GET', 'POST'))
 def likert():
     form = forms.LikertRatingForm(csrf_enabled=False)
+    # store the rating submitted
     if request.method == 'POST':
         score = request.form['rating']
         data_ID = request.form['data-id']
         rating = Rating('likert', data_ID, score)
-        print mongo.db.ratings.find().count()
-        mongo.db.insert('ratings',rating)
-        # print mongo.db.ratings.find().count()
-        idea = mongo.db.ideas.find_one()
-        data = idea
-        return flask.render_template('rating.html', form=form, data=data)
-    else:
-        idea = mongo.db.ideas.find_one()
-        data = idea
-        return flask.render_template('rating.html', form=form, data=data)
+        mongo.db['ratings'].insert(rating.__dict__)
 
-
-@app.route('/rate', methods=('GET', 'POST'))
-def submit():
-    form = forms.LikertRatingForm(csrf_enabled=False)
+    # Get the next idea to rate
+    idea = mongo.db.ideas.find_one()
+    idea = task_manager.get_random(mongo.db, 'ideas')
+    logger.debug(idea)
+    data = idea
     return flask.render_template('rating.html', form=form, data=data)
+
+
 
 if __name__ == '__main__':
     app.debug = True
-    app.run()
+    app.run(host="0.0.0.0", port=5000)
     # mongo.db.create_collection("ratings")
